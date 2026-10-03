@@ -8,7 +8,7 @@ Build a simple system that collects, processes, and visualizes IMU motion data.
 
 ## Current Status
 
-Project setup.
+smoothing the data 
 
 ## Technologies
 

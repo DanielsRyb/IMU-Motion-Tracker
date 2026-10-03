@@ -8,7 +8,7 @@ angular_velocities = []
 
 with open("data/sample.csv", "r") as file:#with...as...打开一个文件并命名
     reader = csv.DictReader(file)#声明reader，csv.DictReader()意味把csv的一行变成dict（字典）类型
-    print(f"{'timestamp':>10} {'ax':>8} {'ay':>8} {'az':>8} {'acceleration':>15} {'gx':>8} {'gy':>8} {'gz':>8} {'angular_velocity':>20}")#f"..."表示f-string，引号内用{}可以代入变量
+    print(f"{'timestamp':>10} {'ax':>8} {'ay':>8} {'az':>8} {'acceleration':>15} {'wx':>8} {'wy':>8} {'wz':>8} {'angular_velocity':>20}")#f"..."表示f-string，引号内用{}可以代入变量
     
     for row in reader:
         ax = float(row["ax"]) #将字符串转换成浮点数类型
@@ -20,14 +20,14 @@ with open("data/sample.csv", "r") as file:#with...as...打开一个文件并命�
         timestamps.append(float(row["timestamp"])) #将当前timestamp加入timestamp列表
         accelerations.append(acceleration)
 
-        gx = float(row["gx"])
-        gy = float(row["gy"])
-        gz = float(row["gz"])
+        wx = float(row["wx"])
+        wy = float(row["wy"])
+        wz = float(row["wz"])
 
-        angular_velocity = math.sqrt(gx**2 + gy**2 + gz**2)
+        angular_velocity = math.sqrt(wx**2 + wy**2 + wz**2)
         angular_velocities.append(angular_velocity)
 
-        print(f"{row['timestamp']:>10} {ax:>8.2f} {ay:>8.2f} {az:>8.2f} {acceleration:>15.2f} {gx:>8.2f} {gy:>8.2f} {gz:>8.2f} {angular_velocity:>20.2f}")
+        print(f"{row['timestamp']:>10} {ax:>8.2f} {ay:>8.2f} {az:>8.2f} {acceleration:>15.2f} {wx:>8.2f} {wy:>8.2f} {wz:>8.2f} {angular_velocity:>20.2f}")
 
 
 
