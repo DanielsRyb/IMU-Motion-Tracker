@@ -18,7 +18,7 @@ with open("data/simulated.csv", "w", newline="") as file:#open的对象不存在
 
         ax = 0.1
         ay = 0.05
-        az = 9.81 + random.gauss(0, 0.05)
+        az = 9.81 + random.gauss(0, 0.05)#值得注意的是，加速度计测到的是 specific force（比力），本质上与非引力接触力有关，因此z轴方向需要减掉重力加速度
 
         wx = 0.01 + random.gauss(0, 0.0005)
         wy = -0.02 + random.gauss(0, 0.0005)

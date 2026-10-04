@@ -7,6 +7,16 @@ accelerations = []#注意这里有“s”，以区分列表和后续使用的浮
 angular_velocities = []
 az_values = []
 
+def moving_average(data, window_size):
+    filtered_data = []
+
+    for i in range(window_size - 1, len(data)):
+        window = data[i - (window_size - 1):i + 1]#window取window_size个值，并且对齐第一个从data[0]开始的window
+        average = sum(window) / window_size#取这window_size个值的平均
+        filtered_data.append(average)
+
+    return filtered_data
+
 
 with open("data/simulated.csv", "r") as file:#with...as...打开一个文件并命名
     reader = csv.DictReader(file)#声明reader，csv.DictReader()意味把csv的一行变成dict（字典）类型
@@ -33,6 +43,9 @@ with open("data/simulated.csv", "r") as file:#with...as...打开一个文件并�
         print(f"{row['timestamp']:>10} {ax:>8.2f} {ay:>8.2f} {az:>8.2f} {acceleration:>15.2f} {wx:>8.2f} {wy:>8.2f} {wz:>8.2f} {angular_velocity:>20.2f}")
 
 
+filtered_az = moving_average(az_values, 5)#窗口为5，相当于用前2个后2个平滑处理当前的值，但是会导致最终数据从原本的len(data)个数据减少为(len(data) - window_size + 1)个，需要让时间戳对齐
+filtered_timestamps = timestamps[2:-2]
+print(filtered_az[:10])
 
 #with负责打开和使用文件，我们现在已经将数据存入列表timestamp和acceleration了，于是跳出with画图
 plt.subplot(3, 1, 1)
@@ -53,7 +66,8 @@ plt.title("Angular velocity vs Time")
 
 plt.subplot(3,1,3)
 
-plt.plot(timestamps, az_values)
+plt.plot(timestamps, az_values, label="Raw")#第一条线数据及标签
+plt.plot(filtered_timestamps, filtered_az, label="Filtered")#第二条线数据及标签
 plt.xlabel("Time (s)")
 plt.ylabel("az (m/s²)")
 plt.title("z-axis Acceleration vs Time")
