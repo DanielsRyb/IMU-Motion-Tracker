@@ -8,7 +8,7 @@ Build a simple system that collects, processes, and visualizes IMU motion data.
 
 ## Current Status
 
-smoothing the data 
+modularize the functions
 
 ## Technologies
 
@@ -16,3 +16,7 @@ smoothing the data
 - C++
 - Git
 - GitHub
+
+## To note :
+
+- The balance between delay and the smooth window size
