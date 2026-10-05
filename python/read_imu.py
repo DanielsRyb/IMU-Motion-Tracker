@@ -1,8 +1,7 @@
-import csv
 import math
 from filter import moving_average#从filter文件里面导入moving_average函数过来
 from visualize import plot_imu_data
-
+from load_data import load_imu_data
 
 
 timestamps = []#创建一个空list用于后续存储连续的数据以便画图
@@ -14,23 +13,27 @@ az_values = []
 
 
 with open("data/simulated.csv", "r") as file:#with...as...打开一个文件并命名
-    reader = csv.DictReader(file)#声明reader，csv.DictReader()意味把csv的一行变成dict（字典）类型
+    
     print(f"{'timestamp':>10} {'ax':>8} {'ay':>8} {'az':>8} {'acceleration':>15} {'wx':>8} {'wy':>8} {'wz':>8} {'angular_velocity':>20}")#f"..."表示f-string，引号内用{}可以代入变量
     
-    for row in reader:
-        ax = float(row["ax"]) #将字符串转换成浮点数类型
-        ay = float(row["ay"])
-        az = float(row["az"])
+    data = load_imu_data("data/simulated.csv")#数据交给load文件，返回data
+
+    print(data[0])
+
+    for row in data:
+        ax = row["ax"] 
+        ay = row["ay"]
+        az = row["az"]
 
         az_values.append(az)
         acceleration = math.sqrt(ax**2 + ay**2 + az**2)
 
-        timestamps.append(float(row["timestamp"])) #将当前timestamp加入timestamp列表
+        timestamps.append(row["timestamp"]) #将当前timestamp加入timestamp列表
         accelerations.append(acceleration)
 
-        wx = float(row["wx"])
-        wy = float(row["wy"])
-        wz = float(row["wz"])
+        wx = row["wx"]
+        wy = row["wy"]
+        wz = row["wz"]
 
         angular_velocity = math.sqrt(wx**2 + wy**2 + wz**2)
         angular_velocities.append(angular_velocity)
