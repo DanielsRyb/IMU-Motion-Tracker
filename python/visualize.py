@@ -41,3 +41,33 @@ def plot_imu_data(
     plt.tight_layout() #自动调整三个图之间的间距，避免标题、坐标轴标签互相挤在一起
     plt.legend()
     plt.show()#显示图像
+
+
+
+
+def plot_orientation(timestamps, rolls, pitches):
+    plt.plot(timestamps, rolls, label = "Roll")
+    plt.plot(timestamps, pitches, label = "Pitch")
+
+    plt.xlabel("Time (s)")
+    plt.ylabel("Angle (degrees)")
+    plt.title("Orientation vs Time")
+    plt.legend()
+
+    plt.tight_layout
+    plt.show()
+
+
+    
+
+def plot_roll_comparison(timestamps, acc_rolls, gyro_rolls):
+    plt.plot(timestamps, acc_rolls, label="Accelerometer")
+    plt.plot(timestamps, gyro_rolls, label="Gyroscope")
+
+    plt.xlabel("Time (s)")
+    plt.ylabel("Roll (degrees)")
+    plt.title("Roll Estimation: Accelerometer vs Gyroscope")
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
