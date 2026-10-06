@@ -24,3 +24,4 @@ modularize the functions
 - The current version of std_deviation_calculate in file Analysis.py is false.
   Extra challenge: how to filter the useable datas when analysing the standard deviation? The noises must be considered¹ but how to tell if the data has a huge change at the time stamp² and if we consider to collect the stable stages³, how can we then collect the datas with relative stable slopes⁴, for example, when the object has an uniform acceleration
 - When calculating the rotation angle through integrating , the Gyro bias accumulates to result in a significant error in long term analysis.
+- But when we analyse the rotation angle through accelerations in x,y,z directions, the accelerations affect the results even though the object has not rotated.

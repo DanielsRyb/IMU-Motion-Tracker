@@ -17,9 +17,9 @@ def calculate_pitch(ax, ay, az):#前后翻滚
 def simulate_gyro_drift():#积分误差
     angle = 0.0
 
-    bias = 0.001      # rad/s
-    dt = 0.01         # s
-    duration = 10     # s
+    bias = 0.001#零点偏差：陀螺仪实际上没有旋转，它仍然会测出一个不为 0 的角速度
+    dt = 0.01
+    duration = 10
 
     angles = []
     timestamps = []
@@ -67,8 +67,6 @@ def integrate_gyro(previous_angle, angular_velocity, dt):
     return previous_angle + angular_velocity * dt
 
 angle = 0.0
-
-
 
 
 gyro_roll = 0.0
