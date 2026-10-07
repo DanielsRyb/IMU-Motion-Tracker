@@ -1,9 +1,9 @@
 import math
-from filter import moving_average#从filter文件里面导入moving_average函数过来
-from visualize import plot_imu_data
-from load_data import load_imu_data
-from analysis import calculate_std
-from analysis import response_time_90
+from filters.filter import moving_average#从filter文件里面导入moving_average函数过来
+from visualize_folder.visualize import plot_imu_data
+from load_data_fodler.load_data import load_imu_data
+from analysis_folder.analysis import calculate_std_deviation
+from analysis_folder.analysis import response_time_90
 
 
 timestamps = []#创建一个空list用于后续存储连续的数据以便画图

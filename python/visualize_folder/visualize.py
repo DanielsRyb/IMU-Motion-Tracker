@@ -45,7 +45,7 @@ def plot_imu_data(
 
 
 
-def plot_orientation(timestamps, rolls, pitches):
+def plot_orientation(timestamps, rolls, pitches):#加速度分析得出
     plt.plot(timestamps, rolls, label = "Roll")
     plt.plot(timestamps, pitches, label = "Pitch")
 
@@ -58,15 +58,35 @@ def plot_orientation(timestamps, rolls, pitches):
     plt.show()
 
 
-    
 
-def plot_roll_comparison(timestamps, acc_rolls, gyro_rolls):
-    plt.plot(timestamps, acc_rolls, label="Accelerometer")
-    plt.plot(timestamps, gyro_rolls, label="Gyroscope")
+
+def plot_roll_comparison(
+    timestamps,
+    accelerometer_rolls,
+    gyro_rolls,
+    filtered_rolls
+):
+    plt.plot(#第一根线
+        timestamps,
+        accelerometer_rolls,
+        label="Accelerometer"
+    )
+
+    plt.plot(#第二根线
+        timestamps,
+        gyro_rolls,
+        label="Gyroscope"
+    )
+
+    plt.plot(#第三根线
+        timestamps,
+        filtered_rolls,
+        label="Complementary Filter"
+    )
 
     plt.xlabel("Time (s)")
     plt.ylabel("Roll (degrees)")
-    plt.title("Roll Estimation: Accelerometer vs Gyroscope")
+    plt.title("Roll Estimation Comparison")
     plt.legend()
 
     plt.tight_layout()

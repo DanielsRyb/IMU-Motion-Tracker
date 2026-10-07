@@ -1,6 +1,6 @@
 import math
-from  load_data import load_imu_data
-from visualize import plot_roll_comparison
+from load_data.load_data import load_imu_data
+from visualize.visualize import plot_roll_comparison
 
 
 
@@ -14,7 +14,7 @@ def calculate_pitch(ax, ay, az):#前后翻滚
 
 
 
-def simulate_gyro_drift():#积分误差
+def simulate_gyro_drift():#模拟积分误差
     angle = 0.0
 
     bias = 0.001#零点偏差：陀螺仪实际上没有旋转，它仍然会测出一个不为 0 的角速度
@@ -81,7 +81,7 @@ for i, row in enumerate(data):#带角标的for循环
     if i == 0:
         dt = 0.0
     else:
-        dt = row["timestamp"] - data[i - 1]["timestamp"]
+        dt = row["timestamp"] - data[i - 1]["timestamp"]#时间戳间隔时长
 
     wx = row["wx"]
     wy = row["wy"]
@@ -93,7 +93,3 @@ for i, row in enumerate(data):#带角标的for循环
     gyro_pitches.append(math.degrees(gyro_pitch))
 
 drift_timestamps, drift_angles = simulate_gyro_drift()
-
-print("Final gyro angle:", drift_angles[-1], "degrees")
-
-plot_roll_comparison(timestamps, acc_rolls, gyro_rolls)

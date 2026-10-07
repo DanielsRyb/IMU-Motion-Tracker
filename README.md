@@ -23,5 +23,8 @@ modularize the functions
 - The current implementation uses a causal moving-average filter suitable for real-time processing. A centered moving average could be considered for offline signal analysis.  
 - The current version of std_deviation_calculate in file Analysis.py is false.
   Extra challenge: how to filter the useable datas when analysing the standard deviation? The noises must be considered¹ but how to tell if the data has a huge change at the time stamp² and if we consider to collect the stable stages³, how can we then collect the datas with relative stable slopes⁴, for example, when the object has an uniform acceleration
+#orientation analysis:
 - When calculating the rotation angle through integrating , the Gyro bias accumulates to result in a significant error in long term analysis.
 - But when we analyse the rotation angle through accelerations in x,y,z directions, the accelerations affect the results even though the object has not rotated.
+- Using complementary filter can be a rough solution when analysis long motion
+  And surprsingly, the graph of complementary filter seemed like an exponential function that we learned in systemtheory, and we can even write the coresponding differential equation. Check filter/little_test
