@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 
 from complementary_filter import complementary_filter
-
+from adaptive_complementary import calculate_acceleration_magnitude, calculate_alpha, adaptive_complementary_filter
 
 sample_rate = 100
 duration = 10
@@ -12,11 +12,15 @@ timestamps = []
 
 accelerometer_rolls = []
 gyro_rolls = []
-filtered_rolls = []
+fixed_complementary_filtered_rolls = []
+
+alphas = []
+adaptive_complementary_filtered_rolls = []
+
 
 gyro_roll = 0.0
-filtered_roll = 0.0
-
+fixed_complementary_filtered_roll = 0.0
+adaptive_complementary_filtered_roll = 0.0
 
 for i in range(sample_rate * duration):
 
@@ -24,6 +28,7 @@ for i in range(sample_rate * duration):
 
     wx = 0.0#没有旋转
 
+    ax = 0
     az = 9.81#重力
 
     if 3 <= timestamp < 5:#出现加速度
@@ -37,17 +42,34 @@ for i in range(sample_rate * duration):
     # Gyroscope integration
     gyro_roll = gyro_roll + wx * dt
 
-    filtered_roll = complementary_filter(
-        filtered_roll,
+    fixed_complementary_filtered_roll = complementary_filter(
+        fixed_complementary_filtered_roll,
         wx,
         dt,
         accelerometer_roll
     )
 
+
+    alpha = calculate_alpha(calculate_acceleration_magnitude(ax, ay, az),
+    alpha_normal=0.98,
+    alpha_dynamic=0.995,
+    threshold=0.025)
+
+    adaptive_complementary_filtered_roll = adaptive_complementary_filter(
+    adaptive_complementary_filtered_roll,
+    wx,
+    dt,
+    accelerometer_roll,
+    alpha
+    )
+
+
     timestamps.append(timestamp)
     accelerometer_rolls.append(math.degrees(accelerometer_roll))
     gyro_rolls.append(math.degrees(gyro_roll))
-    filtered_rolls.append(math.degrees(filtered_roll))
+    fixed_complementary_filtered_rolls.append(math.degrees(fixed_complementary_filtered_roll))
+    alphas.append(alpha)
+    adaptive_complementary_filtered_rolls.append(math.degrees(adaptive_complementary_filtered_roll))
 
 
 plt.plot(
@@ -64,14 +86,26 @@ plt.plot(
 
 plt.plot(
     timestamps,
-    filtered_rolls,
-    label="Complementary Filter"
+    fixed_complementary_filtered_rolls,
+    label="Fixed Complementary Filter"
+)
+
+plt.plot(
+    timestamps,
+    adaptive_complementary_filtered_rolls,
+    label="Adaptive Complementary Filter"
 )
 
 plt.xlabel("Time (s)")
 plt.ylabel("Roll (degrees)")
-plt.title("Effect of Linear Acceleration")
+plt.title("Fixed vs Adaptive Complementary Filters")
 plt.legend()
 
 plt.tight_layout()
+plt.show()
+
+plt.plot(timestamps, alphas)
+plt.xlabel("Time (s)")
+plt.ylabel("Alpha")
+plt.title("Adaptive Filter Alpha")
 plt.show()

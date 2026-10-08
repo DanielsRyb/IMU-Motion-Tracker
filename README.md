@@ -28,3 +28,6 @@ modularize the functions
 - But when we analyse the rotation angle through accelerations in x,y,z directions, the accelerations affect the results even though the object has not rotated.
 - Using complementary filter can be a rough solution when analysis long motion
   And surprsingly, the graph of complementary filter seemed like an exponential function that we learned in systemtheory, and we can even write the coresponding differential equation. Check filter/little_test
+  The adaptive complementay filter reduces the influence of accelerometer measurements during detected dynamic acceleration, but still, there are two problems: 
+  1. The adaptive threshold is sensor- and environment-dependent. Its selection requires prior characterization of the sensor noise distribution and variance; The threshold 0.025 is only a simulation
+  2. The acceleration magnitude criterion is insufficient to distinguish gravitational acceleration from linear acceleration. A measured magnitude close to 9.81 does not necessarily imply that the sensor is stationary or that the measured accelerationis purely gravitational. Linear acceleration may change the acceleration direction without significantly changing its magnitude, leading to erroneous roll/pitch estimates.
