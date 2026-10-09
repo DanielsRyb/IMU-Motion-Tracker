@@ -1,10 +1,10 @@
-from load_data_fodler.load_data import load_imu_data
+from load_data_folder.load_data import load_imu_data
 from orientation_folder.orientation import calculate_roll
-from complementary_filter import complementary_filter#不只是调取这个函数，而是加载一整个模块
+from filters.complementary_filter_file import complementary_filter#不只是调取这个函数，而是加载一整个模块
 import math
 from visualize_folder.visualize import plot_roll_comparison
 
-data = load_imu_data("data/simulated.csv")#读数据
+data = load_imu_data("../data/simulated.csv")#读数据
 
 timestamps = []
 accelerometer_rolls = []

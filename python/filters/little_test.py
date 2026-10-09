@@ -1,8 +1,8 @@
 import math
 import matplotlib.pyplot as plt
 
-from complementary_filter import complementary_filter
-from adaptive_complementary import calculate_acceleration_magnitude, calculate_alpha, adaptive_complementary_filter
+from filters.complementary_filter_file import complementary_filter
+from filters.adaptive_complementary import calculate_acceleration_magnitude, calculate_alpha, adaptive_complementary_filter
 
 sample_rate = 100
 duration = 10
@@ -72,6 +72,7 @@ for i in range(sample_rate * duration):
     adaptive_complementary_filtered_rolls.append(math.degrees(adaptive_complementary_filtered_roll))
 
 
+plt.subplot(2, 1, 1)
 plt.plot(
     timestamps,
     accelerometer_rolls,
@@ -99,13 +100,13 @@ plt.plot(
 plt.xlabel("Time (s)")
 plt.ylabel("Roll (degrees)")
 plt.title("Fixed vs Adaptive Complementary Filters")
-plt.legend()
 
-plt.tight_layout()
-plt.show()
 
-plt.plot(timestamps, alphas)
+plt.subplot(2, 1, 2)
+
+plt.plot(timestamps, alphas, label="Adaptive Alpha")
 plt.xlabel("Time (s)")
 plt.ylabel("Alpha")
 plt.title("Adaptive Filter Alpha")
+plt.subplots_adjust(hspace=0.6)#调整上下间距
 plt.show()

@@ -1,6 +1,6 @@
 import math
-from load_data.load_data import load_imu_data
-from visualize.visualize import plot_roll_comparison
+from load_data_folder.load_data import load_imu_data
+from visualize_folder.visualize import plot_roll_comparison
 
 
 
@@ -37,7 +37,7 @@ def simulate_gyro_drift():#模拟积分误差
 
 
 
-data = load_imu_data("data/simulated.csv")
+data = load_imu_data("../data/simulated.csv")
 
 timestamps = []
 acc_rolls = []

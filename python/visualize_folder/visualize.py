@@ -46,6 +46,8 @@ def plot_imu_data(
 
 
 def plot_orientation(timestamps, rolls, pitches):#加速度分析得出
+    """Plot accelerometer-derived roll and pitch."""
+    plt.figure(figsize=(10, 5))
     plt.plot(timestamps, rolls, label = "Roll")
     plt.plot(timestamps, pitches, label = "Pitch")
 
@@ -54,7 +56,7 @@ def plot_orientation(timestamps, rolls, pitches):#加速度分析得出
     plt.title("Orientation vs Time")
     plt.legend()
 
-    plt.tight_layout
+    plt.tight_layout()
     plt.show()
 
 

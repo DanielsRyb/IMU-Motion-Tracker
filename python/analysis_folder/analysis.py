@@ -1,7 +1,7 @@
 import math
 
 def calculate_std_deviation(data):#计算标准差
-    mean = sum(data) / len(data)#想法：如果当前读到的数据在前面n个数据平均值加减2倍标准差外的话，判断为突变，不计入标准差计算
+    mean = sum(data) / len(data)
 
     squared_errors = []
     for value in data:
