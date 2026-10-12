@@ -14,8 +14,6 @@ with open("data/simulated.csv", "w", newline="") as file:#open的对象不存在
         timestamp = i * dt
         print(f"{timestamp:.2f}")
 
-        
-
         ax = 0.1
         ay = 0.05
         if 3 <= timestamp <5:#if XX : 注意格式

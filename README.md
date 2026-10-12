@@ -8,7 +8,7 @@ Build a simple system that collects, processes, and visualizes IMU motion data.
 
 ## Current Status
 
-modularize the functions
+Setting real motions to evaluate analysis accuracy
 
 ## Technologies
 
@@ -31,3 +31,4 @@ modularize the functions
   The adaptive complementay filter reduces the influence of accelerometer measurements during detected dynamic acceleration, but still, there are two problems: 
   1. The adaptive threshold is sensor- and environment-dependent. Its selection requires prior characterization of the sensor noise distribution and variance; The threshold 0.025 is only a simulation
   2. The acceleration magnitude criterion is insufficient to distinguish gravitational acceleration from linear acceleration. A measured magnitude close to 9.81 does not necessarily imply that the sensor is stationary or that the measured accelerationis purely gravitational. Linear acceleration may change the acceleration direction without significantly changing its magnitude, leading to erroneous roll/pitch estimates.
+- We now have the estimations of the motions, but we dont know the error. Therefore, we need to firstly determine a set of real motion
